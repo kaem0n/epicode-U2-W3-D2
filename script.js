@@ -138,15 +138,6 @@ let hours = 0
 // Timer
 
 setInterval(function () {
-  if (
-    sessionStorage.getItem('seconds', seconds) ||
-    sessionStorage.getItem('minutes', minutes) ||
-    sessionStorage.getItem('hours', hours)
-  ) {
-    seconds = parseInt(sessionStorage.getItem('seconds', seconds))
-    minutes = parseInt(sessionStorage.getItem('minutes', minutes))
-    hours = parseInt(sessionStorage.getItem('hours', hours))
-  }
   seconds++
   if (seconds === 60) {
     seconds = 0
@@ -161,3 +152,16 @@ setInterval(function () {
   sessionStorage.setItem('hours', hours)
   timerText.innerText = `${hours}h ${minutes}m ${seconds}s`
 }, 1000)
+
+// Page load
+
+if (
+  sessionStorage.getItem('seconds', seconds) ||
+  sessionStorage.getItem('minutes', minutes) ||
+  sessionStorage.getItem('hours', hours)
+) {
+  seconds = parseInt(sessionStorage.getItem('seconds', seconds))
+  minutes = parseInt(sessionStorage.getItem('minutes', minutes))
+  hours = parseInt(sessionStorage.getItem('hours', hours))
+  timerText.innerText = `${hours}h ${minutes}m ${seconds}s`
+}
