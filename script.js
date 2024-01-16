@@ -15,6 +15,9 @@ const surnameSpan = document.getElementById('surname-span')
 const emailSpan = document.getElementById('email-span')
 const usernameSpan = document.getElementById('username-span')
 const passwordSpan = document.getElementById('pw-span')
+const passwordEye = document.getElementById('pw-eye')
+const eyeSlash = document.getElementsByClassName('bi-eye-slash')[0]
+const eyeFill = document.getElementsByClassName('bi-eye-fill')[0]
 
 // Class code
 
@@ -41,7 +44,7 @@ const fillCard = function (obj) {
   }
 }
 
-const emptyCard = function () {
+const reset = function () {
   nameSpan.innerText = ''
   surnameSpan.innerText = ''
   emailSpan.innerText = ''
@@ -83,11 +86,33 @@ form.addEventListener('submit', function (e) {
   fillCard(user)
   localStorage.setItem('user', JSON.stringify(user))
   emptyForm()
+  eyeSlash.classList.remove('d-none')
 })
 
 resetButton.addEventListener('click', function () {
-  emptyCard()
+  reset()
   localStorage.clear()
+  if (eyeFill.classList.contains('d-none')) {
+    eyeSlash.classList.add('d-none')
+  } else if (eyeSlash.classList.contains('d-none')) {
+    eyeFill.classList.add('d-none')
+  }
+})
+
+passwordEye.addEventListener('click', function () {
+  const user = JSON.parse(localStorage.getItem('user'))
+  if (eyeFill.classList.contains('d-none')) {
+    eyeFill.classList.remove('d-none')
+    eyeSlash.classList.add('d-none')
+    passwordSpan.innerText = user.password
+  } else if (eyeSlash.classList.contains('d-none')) {
+    eyeSlash.classList.remove('d-none')
+    eyeFill.classList.add('d-none')
+    passwordSpan.innerText = ''
+    for (let i = 0; i < user.password.length; i++) {
+      passwordSpan.innerText += '•'
+    }
+  }
 })
 
 // Page load
