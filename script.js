@@ -163,5 +163,5 @@ if (
   seconds = parseInt(sessionStorage.getItem('seconds', seconds))
   minutes = parseInt(sessionStorage.getItem('minutes', minutes))
   hours = parseInt(sessionStorage.getItem('hours', hours))
-  timerText.innerText = `${hours}h ${minutes}m ${seconds}s`
 }
+timerText.innerText = `${hours}h ${minutes}m ${seconds}s`
